@@ -7,5 +7,9 @@ export class ShoppingCartItem {
     price: number;
     quantity: number; 
 
+    // Object that looks lite ShoppingCartItem, can have one or more parameters
+    constructor (init?: Partial<ShoppingCartItem>){
+        Object.assign(this, init); 
+    }
     get totalPrice() { return this.price * this.quantity; }
 }

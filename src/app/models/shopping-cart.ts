@@ -5,15 +5,25 @@ import { ShoppingCartItem } from './shopping-cart-item';
 export class ShoppingCart {
     items: ShoppingCartItem[] = [];
 
-    constructor(public itemsMap: { [productId: string]: ShoppingCartItem }) {
+    constructor(private itemsMap: { [productId: string]: ShoppingCartItem }) {
         this.itemsMap = itemsMap || {};
-        
+
         for (let productId in itemsMap) {
             let item = itemsMap[productId];
-            let x = new ShoppingCartItem();
-            Object.assign(x, item); 
-            x.$key = productId; 
-            this.items.push(x);
+            // let x = new ShoppingCartItem({
+            //     // // Method 2
+            //     // title: item.title,
+            //     // imageUrl: item.imageUrl,
+            //     // price: item.price,
+            //     // Method 3 spreading
+            //     ...item,
+            //     $key: productId
+                
+            // });
+            // // Method 1
+            // //Object.assign(x, item); 
+            // //x.$key = productId; 
+            this.items.push(new ShoppingCartItem({...item, $key: productId}));
         }
     }
 
